@@ -1,7 +1,0 @@
-com\oracle\application\exception\GlobalExceptionHandler.class
-com\oracle\application\service\AppService.class
-com\oracle\application\exception\ServiceException.class
-com\oracle\application\controller\AppController.class
-com\oracle\application\Application.class
-com\oracle\application\configuration\Configurations.class
-com\oracle\application\service\impl\AppServiceImpl.class
