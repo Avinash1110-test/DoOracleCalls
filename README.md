@@ -15,5 +15,5 @@
 * In this project we used Basic Authentication (username & password).
 * Due to lack of source we are taking username and password from property file.
 * In live we can validate these credentials from SSM Parameter Store/Pipeline.
-##Swagger:
+## Swagger:
 http://localhost:8080/swagger-ui/index.html#/
