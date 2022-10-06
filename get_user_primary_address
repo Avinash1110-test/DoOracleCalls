@@ -1,0 +1,67 @@
+==================================================
+Parent table
+==================================================
+create table user_details (
+    user_id varchar(10) primary key,
+    first_name varchar(30) unique not null,
+    last_name varchar(30) not null,
+    dob date not null,
+    doj date,
+    email_address varchar(30),
+    contact_no number(10)   );
+==================================================
+Child table
+==================================================
+create table user_address (
+    user_id varchar(10),
+    address varchar(1000),
+    primary_address number(1),
+    foreign key (user_id) references user_details(user_id));
+==================================================
+Procedure
+==================================================
+create or replace procedure get_user_primary_address (v_user_id in varchar, address out varchar, err_msg out varchar) is
+
+    user_not_found exception;
+
+    cursor cur_get_users is
+        select user_id from user_details where user_id = v_user_id;
+    v_user_details user_details.user_id%type;
+
+    cursor cur_get_address is
+        select address from user_address where user_id = v_user_id and primary_address = 1;
+
+    begin
+
+        open  cur_get_users;
+        fetch cur_get_users into v_user_details;
+        close cur_get_users;
+
+        if v_user_details is null then
+            raise user_not_found;
+        end if;
+
+        open  cur_get_address;
+        fetch cur_get_address into address;
+        close cur_get_address;
+
+        exception
+            when user_not_found then
+                err_msg := 'Please enter valid user id.';
+            when others then
+                err_msg := SQLERRM;
+    end;
+/
+=============================================================
+PLSQL block to test procedure
+=============================================================
+declare
+    output varchar(1000);
+    err_msg varchar(1000);
+begin
+    get_user_primary_address('Avi111', output, err_msg);
+    dbms_output.put_line(output);
+    dbms_output.put_line(err_msg);
+end;
+/
+==============================================================
