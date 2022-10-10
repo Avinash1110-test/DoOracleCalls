@@ -15,6 +15,7 @@
 * In this project we used Basic Authentication (username & password).
 * Due to lack of source we are taking username and password from property file.
 * In live we can validate these credentials from SSM Parameter Store/Pipeline.
+## Requirements:
 #### For building and running the application:
 * JDK 11.0.16
 * Apache Maven 3.8.6
